@@ -1,6 +1,4 @@
-import { Button } from "@/components/ui/button";
 import { UserButton } from "@clerk/nextjs";
-import { SignOutButton } from "@clerk/nextjs";
 
 export default function Home() {
   return (
@@ -15,7 +13,4 @@ export default function Home() {
 
 
 
-//<SignOutButton redirectUrl="/sign-in">
-//          <Button> SignOut</Button>
-//        </SignOutButton >
 
