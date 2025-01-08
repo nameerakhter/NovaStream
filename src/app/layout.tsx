@@ -29,6 +29,9 @@ export default function RootLayout({
     <ClerkProvider
       appearance={{
         baseTheme: dark,
+        elements: {
+          footer: "hidden"
+        }
       }}
       afterSignOutUrl="/sign-in">
       <html lang="en" suppressHydrationWarning>
