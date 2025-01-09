@@ -9,7 +9,6 @@ datasource db {
 
 
 model User{
-// id username imageUrl externalUserId  bio created At and updated at
 id                    String    @id   @default(uuid())
 username              String    @unique
 imageUrl              String    @db.Text

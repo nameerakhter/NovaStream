@@ -1,6 +1,7 @@
 import { Webhook } from 'svix'
 import { headers } from 'next/headers'
 import { WebhookEvent } from '@clerk/nextjs/server'
+import { db } from '@/lib/db'
 
 export async function POST(req: Request) {
 	const SIGNING_SECRET = process.env.CLERK_WEBHOOK_SECRET
@@ -45,11 +46,19 @@ export async function POST(req: Request) {
 		})
 	}
 
-	// Do something with payload
-	// For this guide, log payload to console
-	const { id } = evt.data
 	const eventType = evt.type
-	console.log(`Received webhook with ID ${id} and event type of ${eventType}`)
+
+	if (evt.type === 'user.created') {
+		await db.user.create({
+			data: {
+				externalUserId: payload.data.id,
+				username: payload.data.username,
+				imageUrl: payload.data.image_url,
+				updatedAt: new Date()
+			}
+		})
+		console.log('userId:', evt.data.id)
+	}
 	console.log('Webhook payload:', body)
 
 	return new Response('Webhook received', { status: 200 })
