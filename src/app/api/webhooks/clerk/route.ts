@@ -2,6 +2,7 @@ import { Webhook } from 'svix'
 import { headers } from 'next/headers'
 import { WebhookEvent } from '@clerk/nextjs/server'
 import { db } from '@/lib/db'
+import { NextResponse } from 'next/server'
 
 export async function POST(req: Request) {
 	const SIGNING_SECRET = process.env.CLERK_WEBHOOK_SECRET
@@ -57,9 +58,46 @@ export async function POST(req: Request) {
 				updatedAt: new Date()
 			}
 		})
-		console.log('userId:', evt.data.id)
 	}
-	console.log('Webhook payload:', body)
+	if (eventType === 'user.updated') {
+		const currentUser = await db.user.findUnique({
+			where: {
+				externalUserId: payload.data.id
+			}
+		})
+		if (!currentUser) {
+			return NextResponse.json({
+				message: "No user found"
+			}, { status: 404 })
+		}
+		await db.user.update({
+			where: {
+				externalUserId: payload.data.id
+			},
+			data: {
+				username: payload.data.username,
+				imageUrl: payload.data.image_url
+			}
+		})
+	}
+
+	if (eventType === 'user.deleted') {
+		const currentUser = await db.user.findUnique({
+			where: {
+				externalUserId: payload.data.id
+			}
+		})
+		if (!currentUser) {
+			return NextResponse.json({
+				message: "No user found"
+			}, { status: 404 })
+		}
+		await db.user.delete({
+			where: {
+				externalUserId: payload.data.id
+			}
+		})
+	}
 
 	return new Response('Webhook received', { status: 200 })
 }
