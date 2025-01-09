@@ -1,4 +1,6 @@
+import { Container } from "./_components/container"
 import Navbar from "./_components/navbar"
+import { Sidebar } from "./_components/sidebar"
 
 
 export default function BrowseLayout({ children }: { children: React.ReactNode }) {
@@ -7,7 +9,9 @@ export default function BrowseLayout({ children }: { children: React.ReactNode }
       <Navbar />
       <div className="flex h-full pt-20">
         <Sidebar />
-        {children}
+        <Container >
+          {children}
+        </Container >
       </div>
     </>
   )
