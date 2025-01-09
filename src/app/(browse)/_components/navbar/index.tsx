@@ -1,3 +1,4 @@
+import { Actions } from "./actions";
 import { Logo } from "./logo";
 import { Search } from "./search";
 
@@ -7,7 +8,7 @@ export default function Navbar() {
 			<div className="fixed top-0 w-full h-20 z-[49]  px-2 lg:px-4 flex justify-between items-center shadow-sm">
 				<Logo />
 				<Search />
-				Navbar
+				<Actions />
 			</div>
 		</nav>
 	)
