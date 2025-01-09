@@ -12,7 +12,7 @@ export async function Actions() {
 		<div className="flex items-center justify-end gap-x-2 ml-4 lg:ml-0">
 			{!user && (
 				<SignInButton>
-					<Button variant="default">Login</Button>
+					<Button variant="primary">Login</Button>
 				</SignInButton>
 			)}
 			{!!user && (

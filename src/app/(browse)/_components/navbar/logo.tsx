@@ -17,7 +17,7 @@ export function Logo() {
 					<Image src="/logo.svg" alt="GameHub" height="32" width="32" />
 				</div>
 				<div className={cn(font.className, "hidden lg:block")}>
-					<p className="text-lg font-semibold">GameHub</p>
+					<p className="text-lg font-semibold">NovaStream</p>
 					<p className="text-xs text-muted-foreground">Let&apos;s Play</p>
 				</div>
 			</div>

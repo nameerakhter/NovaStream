@@ -6,7 +6,8 @@ export default function BrowseLayout({ children }: { children: React.ReactNode }
     <>
       <Navbar />
       <div className="flex h-full pt-20">
-        {children}      </div>
+        {children}
+      </div>
     </>
   )
 }
