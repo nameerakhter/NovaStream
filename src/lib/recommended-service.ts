@@ -6,7 +6,7 @@ export async function getRecommended() {
 
 	try {
 		const self = await getSelf()
-		userId = self
+		userId = self.id
 	} catch {
 		userId = null
 	}
@@ -15,7 +15,7 @@ export async function getRecommended() {
 		users = await db.user.findMany({
 			where: {
 				NOT: {
-					id: userId.id
+					id: userId
 				}
 			},
 			orderBy: {
