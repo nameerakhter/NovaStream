@@ -14,8 +14,13 @@ username              String    @unique
 imageUrl              String    @db.Text
 externalUserId        String    @unique
 bio                   String?   @db.Text
+
 following             Follow[]  @relation("Following")
 FollowedBy            Follow[]  @relation("FollowedBy") 
+
+blocking           Block[]    @relation("Blocking")
+blockedBy          Block[]    @relation("BlockedBy")
+
 createdAt             DateTime  @default(now())
 updatedAt             DateTime
 }
@@ -24,13 +29,31 @@ model Follow {
   id                 String     @id @default(uuid())
   followerId         String
   followingId        String
+
   follower           User       @relation(name: "Following", fields: [followerId], references: [id], onDelete: Cascade)
   following          User       @relation(name: "FollowedBy", fields: [followingId], references: [id], onDelete: Cascade)
+  
   createdAt          DateTime   @default(now())
   updatedAt          DateTime   @updatedAt
 
   @@unique([followerId, followingId])
   @@index([followerId])
   @@index([followingId])
+}
+
+model Block {
+  id                 String     @id @default(uuid())
+  blockerId          String
+  blockedId          String
+
+  blocker            User       @relation(name: "Blocking", fields: [blockerId], references: [id], onDelete: Cascade)
+  blocked            User       @relation(name: "BlockedBy", fields: [blockedId], references: [id], onDelete: Cascade)
+
+  createdAt          DateTime   @default(now())
+  updatedAt          DateTime   @updatedAt
+
+  @@unique([blockerId, blockedId])
+  @@index([blockerId])
+  @@index([blockedId])
 }
 
