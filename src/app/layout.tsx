@@ -4,6 +4,7 @@ import "./globals.css";
 import { ClerkProvider } from "@clerk/nextjs";
 import { dark } from '@clerk/themes'
 import { ThemeProvider } from "@/components/theme-provider";
+import { Toaster } from "sonner"
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -43,6 +44,7 @@ export default function RootLayout({
             forcedTheme="dark"
             storageKey="novastream-theme"
           >
+            <Toaster theme="dark" position="bottom-center" />
             {children}
           </ThemeProvider>
         </body>

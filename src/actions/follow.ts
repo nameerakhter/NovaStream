@@ -6,7 +6,9 @@ import { followUser, unFollowUser } from "@/lib/follow-service";
 
 export const onFollow = async (id: string) => {
   try {
+    console.log("ID passed to onFollow:", id);
     const followedUser = await followUser(id);
+    console.log(followedUser)
 
     revalidatePath("/");
 
@@ -16,6 +18,7 @@ export const onFollow = async (id: string) => {
 
     return followedUser;
   } catch (error) {
+    console.log(error)
     throw new Error("Internal server error");
   }
 };

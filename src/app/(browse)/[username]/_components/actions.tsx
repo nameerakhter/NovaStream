@@ -2,18 +2,30 @@
 import { onFollow } from "@/actions/follow";
 import { Button } from "@/components/ui/button";
 import { useTransition } from "react";
+import { toast } from "sonner";
 
-
-export default function Actions() {
+interface ActionProps {
+	isFollowing: boolean
+	userId: string
+}
+export default function Actions({
+	isFollowing,
+	userId
+}: ActionProps) {
 	const [isPending, startTransition] = useTransition()
 	function onClick() {
 		startTransition(() => {
 
-			onFollow("123")
+			onFollow(userId)
+				.then(() => toast.success("Followed the user"))
+				.catch(() => toast.error("Something went wrong"))
 		})
 	}
 	return (
-		<Button disabled={isPending} onClick={onClick} variant="primary">
+		<Button
+			disabled={isFollowing || isPending}
+			onClick={onClick}
+			variant="primary">
 			Follow
 		</Button >
 	)
