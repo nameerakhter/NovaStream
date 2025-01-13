@@ -5,7 +5,7 @@ import { ArrowLeftFromLine, ArrowRightFromLine } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Skeleton } from "@/components/ui/skeleton";
 import { Hint } from "@/components/hint";
-import { useSidebar } from "../../../../../store/use-sidebar";
+import { useSidebar } from "@/store/use-sidebar";
 
 export function Toggle() {
 	const { collapsed, onExpand, onCollapse } = useSidebar((state) => state);

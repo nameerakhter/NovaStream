@@ -2,8 +2,8 @@
 
 import React from "react";
 import { User } from "@prisma/client";
-import { useSidebar } from "../../../../../store/use-sidebar";
 import { UserItem, UserItemSkeleton } from "./user-item";
+import { useSidebar } from "@/store/use-sidebar";
 
 
 export function Recommended({

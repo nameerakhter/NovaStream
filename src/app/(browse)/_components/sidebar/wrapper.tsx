@@ -3,9 +3,9 @@
 import React from "react";
 import { useIsClient } from "usehooks-ts";
 import { cn } from "@/lib/utils";
-import { useSidebar } from "../../../../../store/use-sidebar";
 import { ToggleSkeleton } from "./toggle";
 import { RecommendedSkeleton } from "./recommended";
+import { useSidebar } from "@/store/use-sidebar";
 //import { FollowingSkeleton } from "./following";
 
 export function Wrapper({ children }: { children: React.ReactNode }) {
