@@ -15,7 +15,7 @@ imageUrl              String    @db.Text
 externalUserId        String    @unique
 bio                   String?   @db.Text
 following             Follow[]  @relation("Following")
-FollowedBy            Follow[]  @relation("FollowedBy")
+FollowedBy            Follow[]  @relation("FollowedBy") 
 createdAt             DateTime  @default(now())
 updatedAt             DateTime
 }

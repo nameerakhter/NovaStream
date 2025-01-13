@@ -3,8 +3,9 @@
 import React from "react";
 import { Follow, User } from "@prisma/client";
 
-import { UserItem, UserItemSkeleton } from "./user-item";
 import { useSidebar } from "@/store/use-sidebar";
+
+import { UserItem, UserItemSkeleton } from "./user-item";
 
 export function Following({
 	data,
@@ -32,7 +33,7 @@ export function Following({
 						key={follow.following.id}
 						username={follow.following.username}
 						imageUrl={follow.following.imageUrl}
-						isLive={follow.following.stream?.isLive}
+					//isLive={true}
 					/>
 				))}
 			</ul>
