@@ -17,7 +17,7 @@ export default function Actions({
 		startTransition(() => {
 
 			onFollow(userId)
-				.then(() => toast.success("Followed the user"))
+				.then((data) => toast.success(`You are now following ${data.following.username}`))
 				.catch(() => toast.error("Something went wrong"))
 		})
 	}
