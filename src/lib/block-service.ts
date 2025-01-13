@@ -16,14 +16,15 @@ export const isBlockedByUser = async (id: string) => {
 		const existingBlock = await db.block.findUnique({
 			where: {
 				blockerId_blockedId: {
-					blockerId: otherUser.id,
-					blockedId: self.id,
+					blockerId: self.id,
+					blockedId: otherUser.id,
 				},
 			},
 		});
 
 		return !!existingBlock;
-	} catch {
+	} catch (error) {
+		console.log(error)
 		return false;
 	}
 };

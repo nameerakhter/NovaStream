@@ -50,7 +50,7 @@ export default function Actions({
 				.catch(() => toast.error("Something went wrong, failed to block"));
 		});
 	};
-	const handleUnblock = () => {
+	function handleUnblock() {
 		startTransition(() => {
 			onUnblock(userId)
 				.then((data) =>
@@ -59,6 +59,14 @@ export default function Actions({
 				.catch(() => toast.error("Something went wrong, failed to unblock"));
 		});
 	};
+
+	function onClickBlock() {
+		if (isBlocked) {
+			handleUnblock()
+		} else {
+			handleBlock()
+		}
+	}
 	return (
 		<>
 			<Button
@@ -67,11 +75,12 @@ export default function Actions({
 				variant="primary">
 				{isFollowing ? "Unfollow" : "Follow"}
 			</Button >
-			<Button onClick={handleBlock} disabled={isPending}>
-				Block
-			</Button>
-			<Button onClick={handleUnblock} disabled={isPending}>
-				UnBlock
+			<Button
+				disabled={isPending}
+				onClick={onClickBlock}
+				variant="destructive"
+			>
+				{isBlocked ? "Unblock" : "Block"}
 			</Button>
 
 

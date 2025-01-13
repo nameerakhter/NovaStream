@@ -8,22 +8,35 @@ import { blockUser, unblockUser } from "@/lib/block-service";
 export const onBlock = async (id: string) => {
   //TODO: Adapt to disconnect from livestream
   //TODO: Allow to kick the guest
-  const blockedUser = await blockUser(id)
-  revalidatePath("/")
+  try {
+    const blockedUser = await blockUser(id)
+    revalidatePath("/")
 
-  if (blockedUser) {
-    revalidatePath(`${blockedUser.blocked.username}`)
+    if (blockedUser) {
+      revalidatePath(`/${blockedUser.blocked.username}`)
+    }
+
+    return blockedUser;
+
+  } catch (error) {
+    console.log(error)
+    throw new Error("Internal server error");
   }
-
-  return blockedUser;
 };
 
 export const onUnblock = async (id: string) => {
-  const unblockedUser = await unblockUser(id);
-  revalidatePath("/")
+  try {
+    const unblockedUser = await unblockUser(id);
+    revalidatePath("/")
 
-  if (unblockedUser) {
-    revalidatePath(`${unblockedUser.blocked.username}`)
+    if (unblockedUser) {
+      revalidatePath(`/${unblockedUser.blocked.username}`)
+    }
+    return unblockedUser;
+
+  } catch (error) {
+
+    console.log(error)
+    throw new Error("Internal server error");
   }
-  return unblockedUser;
 };
