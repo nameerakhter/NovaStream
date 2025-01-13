@@ -29,7 +29,7 @@ export async function isFollowingUser(id: string) {
 }
 
 
-export const followUser = async (id: string) => {
+export async function followUser(id: string) {
 	const self = await getSelf();
 
 	const otherUser = await db.user.findUnique({
