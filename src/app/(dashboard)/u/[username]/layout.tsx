@@ -1,9 +1,9 @@
 import { redirect } from "next/navigation";
 import { Metadata } from "next";
 import { getSelfByUsername } from "@/lib/auth-service";
-import { Sidebar } from "@/app/(browse)/_components/sidebar";
 import { Container } from "@/app/(browse)/_components/container";
 import Navbar from "./_components/navbar";
+import { Sidebar } from "./_components/sidebar";
 
 
 export const metadata: Metadata = {
