@@ -15,7 +15,7 @@ export default async function CreatorLayout({
 	params,
 }: {
 	children: React.ReactNode;
-	params: { username: string };
+	params: Promise<{ username: string }>;
 }) {
 	const { username } = await params
 	const self = await getSelfByUsername(username);

@@ -4,11 +4,11 @@ import { notFound } from "next/navigation";
 import Actions from "./_components/actions";
 import { isBlockedByUser } from "@/lib/block-service";
 
-interface UserPageProps {
-  params: { username: string };
-}
-
-export default async function userPage({ params }: UserPageProps) {
+//interface UserPageProps {
+//  params: { username: string };
+//}
+//
+export default async function userPage({ params }: { params: Promise<{ username: string }> }) {
   const awaitedParams = (await params).username
   const user = await getUserByUsername(awaitedParams)
 
@@ -18,7 +18,6 @@ export default async function userPage({ params }: UserPageProps) {
 
   const isFollowing = await isFollowingUser(user.id)
   const isBlockedByThisUser = await isBlockedByUser(user.id)
-  console.log(isBlockedByThisUser)
 
   return (
     <div className="flex flex-col gap-y-4">
