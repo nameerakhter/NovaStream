@@ -1,11 +1,3 @@
-// import { SignUp } from "@clerk/nextjs";
-
-// export default function Page() {
-// 	return (
-// 		<SignUp />
-// 	)
-// }
-
 import { SignUp } from "@clerk/nextjs";
 
 export default function Page() {
@@ -20,7 +12,7 @@ export default function Page() {
                 formButtonPrimary: "text-black font-bold py-2 px-4 ",
                 card: "shadow-xl rounded-lg p-8 bg-black",
                 header: "text-3xl font-bold mb-6 text-white",
-                socialButtons:"flex border-[#242428] border-[2px] rounded-lg gap-2 hover:bg-[#242428]",
+                socialButtons: "flex border-[#242428] border-[2px] rounded-lg gap-2 hover:bg-[#242428]",
                 dividerLine: "my-4 border-t border-gray-300",
               },
             }}
