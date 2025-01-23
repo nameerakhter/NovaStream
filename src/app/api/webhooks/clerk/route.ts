@@ -63,6 +63,7 @@ export async function POST(req: Request) {
 				updatedAt: new Date()
 			}
 		})
+		console.log("Webhook received:", req.body);
 	}
 	if (eventType === 'user.updated') {
 		const currentUser = await db.user.findUnique({
