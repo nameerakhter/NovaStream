@@ -4,7 +4,7 @@ import { getStreamByUserId } from "@/lib/stream-service";
 
 import { URLCard } from "./_components/url-card";
 import { KeyCard } from "./_components/key-card";
-import ConnectModal from "./_components/connect-modal";
+import { ConnectModal } from "./_components/connect-modal";
 
 export default async function KeysPage() {
 	const self = await getSelf();
