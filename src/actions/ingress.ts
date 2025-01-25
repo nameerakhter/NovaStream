@@ -26,6 +26,7 @@ const roomService = new RoomServiceClient(
 const ingressClient = new IngressClient(process.env.NEXT_PUBLIC_LIVEKIT_WS_URL!, process.env.LIVEKIT_API_KEY!, process.env.LIVEKIT_API_SECRET!);
 
 
+ // Fetches ingresses associated with a host ID, then retrieves and deletes corresponding rooms.
 export async function resetIngresses(hostId: string) {
   try {
     const ingresses = await ingressClient.listIngress({
