@@ -11,8 +11,13 @@ body {
   scrollbar-width: none
 }
 
-.hidden-scrollbar::-webkit-scrollbar {
-  display: none
+/*.hidden-scrollbar::-webkit-scrollbar {*/
+/*  display: none*/
+/*}*/
+/**/
+.hidden-scrollbar {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
 }
 
 @layer base {
