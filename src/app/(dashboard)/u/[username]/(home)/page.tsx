@@ -1,16 +1,17 @@
 import React from "react";
-import { curentUser } from "@clerk/nextjs";
+import { currentUser } from "@clerk/nextjs/server";
 
 import { getUserByUsername } from "@/lib/user-service";
 import {StreamPlayer} from "@/components/stream-player";
 
 export default async function CreatorPage({
-  params: { username },
+  params,
 }: {
   params: { username: string };
 }) { 
+  const { username } = await params;
 
-  const externalUser = await currentUser();//fix: this from clerk
+  const externalUser = await currentUser();
   const user = await getUserByUsername(username);
 
   if (!user || user.externalUserId !== externalUser?.id || !user.stream) {
