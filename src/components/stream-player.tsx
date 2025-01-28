@@ -12,6 +12,7 @@ interface StreamPlayerProps{
 
 export  function StreamPlayer({user, stream, isFollowing}:StreamPlayerProps){
     const {token, name , identity} = useViewerToken(user.id)
+
     if(!token || !name || !identity){
         return(
             <div>Cannot watch the stream</div>
