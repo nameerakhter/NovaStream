@@ -5,8 +5,9 @@ import {
 	useTracks,
 } from "@livekit/components-react";
 
-export function Video({ hostname, hostIdentity }: { hostname: string, hostIdentity: string }) {
-	const connectionState = useConnectionState();
+export function Video({ hostName, hostIdentity, stream }: { hostName: string, hostIdentity: string }) {
+	console.log(stream)
+	const connectionState = useConnectionState(stream);
 	const participant = useRemoteParticipant(hostIdentity);
 	const tracks = useTracks([
 		Track.Source.Camera,
