@@ -4,10 +4,13 @@ import {
 	useRemoteParticipant,
 	useTracks,
 } from "@livekit/components-react";
+import { OfflineVideo } from "./offline-video";
 
-export function Video({ hostName, hostIdentity, stream }: { hostName: string, hostIdentity: string }) {
-	console.log(stream)
-	const connectionState = useConnectionState(stream);
+import { Room } from "livekit-client";
+import { LoadingVideo } from "./loading-video";
+
+export function Video({ hostName, hostIdentity, room }: { hostName: string, hostIdentity: string, room: Room }) {
+	const connectionState = useConnectionState(room);
 	const participant = useRemoteParticipant(hostIdentity);
 	const tracks = useTracks([
 		Track.Source.Camera,
@@ -17,17 +20,18 @@ export function Video({ hostName, hostIdentity, stream }: { hostName: string, ho
 	let content;
 
 	if (!participant && connectionState === ConnectionState.Connected) {
-		content = <p> Host is offline </p>;
+		content = <OfflineVideo username={hostName} />;
 	} else if (!participant || tracks.length === 0) {
-		content = <p> loading... </p>;
+		console.log(participant, tracks)
+		content =  <LoadingVideo label={connectionState} />;
 	} else {
 		content = <p>Live Video</p>;
 	}
 
 	return (
-	<div className="aspect-video border-b group relative">
-		{content}
-	</div>
+		<div className="aspect-video border-b group relative">
+			{content}
+		</div>
 	);
 }
 
