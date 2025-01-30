@@ -16,7 +16,6 @@ import { revalidatePath } from "next/cache";
 import { db } from "@/lib/db";
 import { getSelf } from "@/lib/auth-service";
 
-
 const roomService = new RoomServiceClient(
   process.env.LIVEKIT_API_URL!,
   process.env.LIVEKIT_API_KEY!,
@@ -25,8 +24,6 @@ const roomService = new RoomServiceClient(
 
 const ingressClient = new IngressClient(process.env.NEXT_PUBLIC_LIVEKIT_WS_URL!, process.env.LIVEKIT_API_KEY!, process.env.LIVEKIT_API_SECRET!);
 
-
- // Fetches ingresses associated with a host ID, then retrieves and deletes corresponding rooms.
 export async function resetIngresses(hostId: string) {
   try {
     const ingresses = await ingressClient.listIngress({
@@ -49,7 +46,6 @@ export async function resetIngresses(hostId: string) {
     console.error("Error resetting ingresses:", error);
     throw new Error("Failed to reset ingresses");
   }
-
 };
 
 export async function createIngress(ingressType: IngressInput) {
@@ -100,11 +96,16 @@ export async function createIngress(ingressType: IngressInput) {
       streamKey: ingress.streamKey,
     },
   });
+  
+  const rooms = await roomService.listRooms([self.id]);
+  const room = rooms.length > 0 ? rooms[0] : null;
+
 
   const ingressData = {
     ingressId: ingress.ingressId,
     serverUrl: ingress.url,
     streamKey: ingress.streamKey,
+    roomId: room ? room.sid : null,
   };
 
   revalidatePath(`/u/${self.username}/keys`);
