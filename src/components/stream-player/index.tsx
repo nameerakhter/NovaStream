@@ -10,6 +10,7 @@ import { Room } from "livekit-client";
 import { Video, VideoSkeleton } from "./video";
 import { Chat, ChatSkeleton } from "./chat";
 import { Header, HeaderSkeleton } from "./header";
+import { InfoCard } from "./info-card";
 
 
 interface Stream {
@@ -30,6 +31,8 @@ interface StreamPlayerProps {
 
 export function StreamPlayer({ user, stream, isFollowing }: StreamPlayerProps) {
 	const { token, name, identity } = useViewerToken(user.id)
+	console.log("user.id", user.id)
+	console.log("identity", identity)
 	const { collapsed } = useChatSidebar((state) => state);
 
 	if (!token || !name || !identity) {
@@ -61,6 +64,12 @@ export function StreamPlayer({ user, stream, isFollowing }: StreamPlayerProps) {
 					name={stream.name}
 					viewerIdentity={identity}
 				/>
+					<InfoCard
+						hostIdentity={user.id}
+						viewerIdentity={identity}
+						name={stream.name}
+						thumbnailUrl={stream.thumbnailUrl}
+					/>
 			</div>
 			<div className={cn("col-span-1", collapsed && "hidden")}>
 				<Chat
