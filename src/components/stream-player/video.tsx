@@ -11,6 +11,7 @@ import { LoadingVideo } from "./loading-video";
 
 export function Video({ hostName, hostIdentity, room }: { hostName: string, hostIdentity: string, room: Room }) {
 	const connectionState = useConnectionState(room);
+    console.log("connectionState", connectionState);
 	const participant = useRemoteParticipant(hostIdentity);
 	const tracks = useTracks([
 		Track.Source.Camera,
@@ -22,8 +23,9 @@ export function Video({ hostName, hostIdentity, room }: { hostName: string, host
 	if (!participant && connectionState === ConnectionState.Connected) {
 		content = <OfflineVideo username={hostName} />;
 	} else if (!participant || tracks.length === 0) {
-		console.log(participant, tracks)
-		content =  <LoadingVideo label={connectionState} />;
+		console.log("participant", participant);
+		console.log("tracks", tracks);
+				content =  <LoadingVideo label={connectionState} />;
 	} else {
 		content = <p>Live Video</p>;
 	}
