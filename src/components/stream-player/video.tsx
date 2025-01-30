@@ -11,7 +11,7 @@ import { LoadingVideo } from "./loading-video";
 import { Skeleton } from "../ui/skeleton";
 
 export function Video({ hostName, hostIdentity, room }: { hostName: string, hostIdentity: string, room: Room }) {
-	const connectionState = useConnectionState(room);
+	const connectionState = useConnectionState();
     console.log("connectionState", connectionState);
 	const participant = useRemoteParticipant(hostIdentity);
 	const tracks = useTracks([
@@ -26,7 +26,7 @@ export function Video({ hostName, hostIdentity, room }: { hostName: string, host
 	} else if (!participant || tracks.length === 0) {
 		console.log("participant", participant);
 		console.log("tracks", tracks);
-				content =  <LoadingVideo label={connectionState} />;
+		content =  <LoadingVideo label={connectionState} />;
 	} else {
 		content = <p>Live Video</p>;
 	}
