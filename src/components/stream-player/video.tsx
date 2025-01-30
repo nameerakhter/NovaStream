@@ -8,6 +8,7 @@ import { OfflineVideo } from "./offline-video";
 
 import { Room } from "livekit-client";
 import { LoadingVideo } from "./loading-video";
+import { Skeleton } from "../ui/skeleton";
 
 export function Video({ hostName, hostIdentity, room }: { hostName: string, hostIdentity: string, room: Room }) {
 	const connectionState = useConnectionState(room);
@@ -37,3 +38,10 @@ export function Video({ hostName, hostIdentity, room }: { hostName: string, host
 	);
 }
 
+export function VideoSkeleton() {
+	return (
+	  <div className="aspect-video border-x border-background">
+		<Skeleton className="h-full w-full rounded-none" />
+	  </div>
+	);
+  }
