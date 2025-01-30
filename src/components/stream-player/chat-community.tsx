@@ -20,7 +20,7 @@ export function ChatCommunity({
   isHidden: boolean;
 }) {
   const [value, setValue] = useState("");
-  const debouncedValue = useDebounceValue<string>(value, 500);
+  const [debouncedValue, setDebouncedValue] = useDebounceValue<string>(value, 500);
 
   const participants = useParticipants();
 
